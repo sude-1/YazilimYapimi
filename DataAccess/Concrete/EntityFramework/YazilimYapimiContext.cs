@@ -17,6 +17,10 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<AddMoney> AddMoney { get; set; }
+        public DbSet<AddProduct> AddProducts { get; set; }
+        public DbSet<UserWallet> UserWallet { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
