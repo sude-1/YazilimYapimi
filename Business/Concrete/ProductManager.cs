@@ -26,7 +26,7 @@ namespace Business.Concrete
         }
 
         //[SecuredOperation("product.add,admin")]
-        [ValidationAspect(typeof(ProductValidator))]
+        //[ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
         {
@@ -36,12 +36,12 @@ namespace Business.Concrete
 
             return new SuccessResult(Messages.ProductAdded);
         }
-        
+
         //[TransactionScopeAspect]
         //public IResult AddTransactionalTest(Product product)
         //{
         //    Add(product);
-            
+
         //}
 
         [CacheAspect]
@@ -69,6 +69,13 @@ namespace Business.Concrete
         public IDataResult<List<ProductDetailDto>> GetProductDetails()
         {
             return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails());
+        }
+
+        public IDataResult<Product> IsThereAnyProduct(AddProduct addProduct)
+        {
+            return new SuccessDataResult<Product>(_productDal.Get(p => p.CategoryId == addProduct.CategoryId &&
+            p.ProductId==addProduct.ProductId && p.SupplierId==addProduct.SupplierId 
+            && p.Quantity==addProduct.Quantity && p.ProductName==addProduct.ProductName ));
         }
 
         [ValidationAspect(typeof(ProductValidator))]

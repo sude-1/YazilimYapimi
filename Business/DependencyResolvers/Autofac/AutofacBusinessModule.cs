@@ -23,6 +23,21 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
             builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
 
+            builder.RegisterType<AddProductManager>().As<IAddProductService>().SingleInstance();
+            builder.RegisterType<EfAddProductDal>().As<IAddProductDal>().SingleInstance();
+
+            builder.RegisterType<AddMoneyManager>().As<IAddMoneyService>().SingleInstance();
+            builder.RegisterType<EfAddMoneyDal>().As<IAddMoneyDal>().SingleInstance();
+
+            builder.RegisterType<OrderManager>().As<IOrderService>().SingleInstance();
+            builder.RegisterType<EfOrderDal>().As<IOrderDal>().SingleInstance();
+
+            builder.RegisterType<OrderDetailManager>().As<IOrderDetailService>().SingleInstance();
+            builder.RegisterType<EfOrderDetailDal>().As<IOrderDetailDal>().SingleInstance();
+
+            builder.RegisterType<UserWalletManager>().As<IUserWalletService>().SingleInstance();
+            builder.RegisterType<EfUserWalletDal>().As<IUserWalletDal>().SingleInstance();
+
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();
 

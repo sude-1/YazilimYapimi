@@ -12,8 +12,5 @@ namespace Entities.Concrete
         public int CustomerId { get; set; }
         public DateTime OrderDate { get; set; }
         public decimal Quantity { get; set; }
-        
-
-
     }
 }

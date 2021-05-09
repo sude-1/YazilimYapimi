@@ -9,10 +9,10 @@ namespace Business.Abstract
 {
     public interface IAddProductService
     {
-        IResult Add(Product product);
-        IDataResult<List<AddProduct>> ToBeApproved();
-        IDataResult<AddProduct> GetByIdToApprove(int productId);
-        IDataResult<List<AddProductDetailDto>> GetAddProductDetails();
-
+        IResult Add(AddProduct product);
+        IDataResult<List<AddProductDetailDto>> ToBeApproved();
+        //IDataResult<List<AddProductDetailDto>> GetAddProductDetails();
+        IResult Refusal(int addproductId);
+        IResult Approve(int addproductId);//id üzerinden onaylama
     }
 }

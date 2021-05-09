@@ -17,10 +17,12 @@ namespace WebAPI.Controllers
     public class ProductsController : ControllerBase
     {
         IProductService _productService;
+        IAddProductService _addProductService;
 
-        public ProductsController(IProductService productService)
+        public ProductsController(IProductService productService, IAddProductService addProductService)
         {
             _productService = productService;
+            _addProductService = addProductService;
         }
 
         [HttpGet("getall")]
@@ -61,9 +63,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Product product)
+        public IActionResult Add(AddProduct addProduct )
         {
-            var result = _productService.Add(product);
+            var result = _addProductService.Add(addProduct);
             if (result.Success)
             {
                 return Ok(result);

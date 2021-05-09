@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.ValidatonRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -12,30 +14,65 @@ namespace Business.Concrete
     public class AddProductManager : IAddProductService
     {
         IAddProductDal _addProductDal;
+        IProductService _productService;
 
-        public AddProductManager(IAddProductDal addProductDal)
+        public AddProductManager(IAddProductDal addProductDal,IProductService productService)
         {
             _addProductDal = addProductDal;
+            _productService = productService; 
         }
 
-        public IResult Add(Product product)
+        [ValidationAspect(typeof(AddProductValidator))]
+        public IResult Add(AddProduct product)
         {
-            throw new NotImplementedException();
+            _addProductDal.Add(product);
+            return new SuccessResult();
         }
 
-        public IDataResult<List<AddProductDetailDto>> GetAddProductDetails()
+        //public IDataResult<List<AddProductDetailDto>> GetAddProductDetails()
+        //{
+        //    return new SuccessDataResult<List<AddProductDetailDto>>(_addProductDal.GetAddProductDetails());
+        //}
+
+        public IResult Approve(int addproductId)
         {
-            throw new NotImplementedException();
+            var result = _addProductDal.Get(addp => addp.Id == addproductId);
+            if (result.Confirmation)
+            {
+                return new ErrorResult();
+            }
+            result.Confirmation = true;
+            var product = _productService.IsThereAnyProduct(result).Data;
+            if (product!=null)
+            {
+                product.Quantity += result.Quantity;
+                _productService.Update(product);
+            }
+            else
+            {
+                _productService.Add(new Product
+                {
+                    Quantity = result.Quantity,
+                    ProductName = result.ProductName,
+                    UnitPrice = result.UnitPrice,
+                    SupplierId = result.SupplierId,
+                    CategoryId = result.CategoryId
+                });
+            }
+            return new SuccessResult();
         }
 
-        public IDataResult<AddProduct> GetByIdToApprove(int productId)
+        public IDataResult<List<AddProductDetailDto>> ToBeApproved()//onaylancaklar
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<AddProductDetailDto>>
+                (_addProductDal.GetAddProductDetails(addp => addp.Confirmation == false));
         }
 
-        public IDataResult<List<AddProduct>> ToBeApproved()//onaylancaklar
+        public IResult Refusal(int addproductId)
         {
-            return new SuccessDataResult<List<AddProduct>>(_addProductDal.GetAll(p => p.Confirmation == false));
+            _addProductDal.Delete(new AddProduct { Id = addproductId });
+            return new SuccessResult("ürün ekleme reddedildi");
         }
     }
 }
+

@@ -14,5 +14,6 @@ namespace Entities.Concrete
         public decimal UnitPrice { get; set; }
         public decimal Quantity { get; set; }
         public bool  Confirmation { get; set; }
+        public string ProductName { get; set; }
     }
 }

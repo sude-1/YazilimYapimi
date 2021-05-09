@@ -8,7 +8,7 @@ namespace Core.DataAccess
 {
     //generic constraint ------ generic kısıt
     //class referans tip demek
-    //IEntity den implemente olması ve new'lenebilir olması gere
+    //IEntity den implemente olması ve new'lenebilir olması gerek
     public interface IEntityRepository<T> where T: class,IEntity,new()
     {
         List<T> GetAll(Expression<Func<T, bool>> filter = null);
