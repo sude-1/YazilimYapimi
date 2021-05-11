@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
+using Core.Aspects.Autofac.Caching;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -19,9 +21,12 @@ namespace Business.Concrete
             _userWalletService = userWalletService;
         }
 
+        [CacheRemoveAspect("IUserService.Get")]
+        [SecuredOperation("user")]
         public IResult Add(User user)
         {
             _userDal.Add(user);
+            _userDal.AddUserOperationClaims(new UserOperationClaim { UserId = user.Id, OperationClaimId = 2 });
             _userWalletService.CreateWallet(user);
             return new SuccessResult();
         }

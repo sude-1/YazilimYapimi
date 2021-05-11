@@ -25,8 +25,6 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
-        //[SecuredOperation("product.add,admin")]
-        //[ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
         {
@@ -36,13 +34,6 @@ namespace Business.Concrete
 
             return new SuccessResult(Messages.ProductAdded);
         }
-
-        //[TransactionScopeAspect]
-        //public IResult AddTransactionalTest(Product product)
-        //{
-        //    Add(product);
-
-        //}
 
         [CacheAspect]
         public IDataResult<List<Product>> GetAll()
@@ -74,12 +65,12 @@ namespace Business.Concrete
         public IDataResult<Product> IsThereAnyProduct(AddProduct addProduct)
         {
             return new SuccessDataResult<Product>(_productDal.Get(p => p.CategoryId == addProduct.CategoryId &&
-            p.ProductId==addProduct.ProductId && p.SupplierId==addProduct.SupplierId 
+             p.SupplierId==addProduct.SupplierId 
             && p.Quantity==addProduct.Quantity && p.ProductName==addProduct.ProductName ));
         }
 
-        [ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")]
+        [SecuredOperation("user")]
         public IResult Update(Product product)
         {
             _productDal.Update(product);

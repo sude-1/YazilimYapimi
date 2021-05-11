@@ -22,13 +22,15 @@ namespace Core.Aspects.Autofac.Validation
             _validatorType = validatorType;
         }
         protected override void OnBefore(IInvocation invocation)
-        {
+        {   //hangi IValidator olcaksa onun istance sini oluştur
             var validator = (IValidator)Activator.CreateInstance(_validatorType);
+            //basetype nı bul ve ordaki ilk generic argumanı bul ve onu entityType da tut
             var entityType = _validatorType.BaseType.GetGenericArguments()[0];
+            //invocation(method) argumanlarından entitytype a denk geleni entities e at
             var entities = invocation.Arguments.Where(t => t.GetType() == entityType);
-            foreach (var entity in entities)
+            foreach (var entity in entities)//her birini tek tek gez
             {
-                ValidationTool.Validate(validator, entity);
+                ValidationTool.Validate(validator, entity); //validationtool u kullanarak validate et
             }
         }
     }

@@ -20,15 +20,21 @@ namespace Core.Utilities.Security.JWT
         public JwtHelper(IConfiguration configuration)
         {
             Configuration = configuration;
+            //_tokenoptions bu süreyi configurationdan alıcak
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
         }
+
+        //token oluşumu için gerekli olan şeyler
         public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)
         {
+            //token ne zamamn geçersiz olacak = şu andan itibaren dakika ekle _tokenoptionstan alıcak süreyi
             _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
+            // securitykey'i ise _tokenoptions daki SecurityKey'den alıyor onu ise SecurityKeyHelper bu sınıftaki
+            //CreateSecurityKey bu methodu kullanarak yaparız
             var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
-            var signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey);
-            var jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials, operationClaims);
+            var signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey);//hangi anahtar hangi algoritma
+            var jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials, operationClaims);//jwt üretimi ve bunun için gerekli olan parametreler
             var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
             var token = jwtSecurityTokenHandler.WriteToken(jwt);
 
@@ -39,7 +45,7 @@ namespace Core.Utilities.Security.JWT
             };
 
         }
-
+        //method ile jwt oluşumu
         public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user,
             SigningCredentials signingCredentials, List<OperationClaim> operationClaims)
         {
@@ -54,9 +60,10 @@ namespace Core.Utilities.Security.JWT
             return jwt;
         }
 
+        //kullanıcı ve claim bilgisini parametere alarak bir tane claim listesi oluşturma
         private IEnumerable<Claim> SetClaims(User user, List<OperationClaim> operationClaims)
         {
-            var claims = new List<Claim>();
+            var claims = new List<Claim>();//IEnumerable base'i
             claims.AddNameIdentifier(user.Id.ToString());
             claims.AddEmail(user.Email);
             claims.AddName($"{user.FirstName} {user.LastName}");

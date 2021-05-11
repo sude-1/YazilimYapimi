@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.ValidatonRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -27,6 +29,8 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(OrderValidator))]
+        [SecuredOperation("user")]
+        [CacheRemoveAspect("IOrderService.Get")]
         public IResult Add(Order order)
         {
             throw new NotImplementedException();

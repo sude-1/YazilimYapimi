@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.DTOs;
@@ -18,6 +19,8 @@ namespace Business.Concrete
         {
             _orderDetailDal = orderDetailDal;
         }
+
+        [SecuredOperation("admin")]
         public IDataResult<List<OrderDetailDto>> GetOrderDetails()
         {
             return new SuccessDataResult<List<OrderDetailDto>>(_orderDetailDal.GetOrderDetails());

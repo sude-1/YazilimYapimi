@@ -44,7 +44,7 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 
-
+            // çalışan uygulama içerisinde implemente edilmiş interface leri bul onlar için AspectInterceptorSelector bunu çağır
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

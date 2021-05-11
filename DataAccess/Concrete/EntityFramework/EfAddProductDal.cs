@@ -23,8 +23,6 @@ namespace DataAccess.Concrete.EntityFramework
                     on addproduct.CategoryId equals c.CategoryId
                     join u in context.Users
                     on addproduct.SupplierId equals u.Id
-                    join p in context.Products
-                    on addproduct.ProductId equals p.ProductId
                     // neye göre join etmesi gerektiğini belirttim 
                     select new AddProductDetailDto 
                     {
@@ -32,7 +30,7 @@ namespace DataAccess.Concrete.EntityFramework
                         CategoryName = c.CategoryName,
                         UnitPrice = addproduct.UnitPrice,
                         Quantity = addproduct.Quantity,
-                        ProductName = p.ProductName,
+                        ProductName = addproduct.ProductName,
                         SupplierName = u.UserName
                     };
                 return result.ToList(); 

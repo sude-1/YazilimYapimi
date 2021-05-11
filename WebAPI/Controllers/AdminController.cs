@@ -22,18 +22,6 @@ namespace WebAPI.Controllers
             _addProductService = addProductService;
         }
 
-        [HttpGet("addmoney")]
-
-        public IActionResult AddMoney(AddMoney money)
-        {
-            var result = _addMoneyService.Add(money);//sor salihe
-            if (result.Success)
-            {
-                return Ok(result);
-            }           
-            return BadRequest(result);           
-        }
-
         [HttpPost("approveaddmoney")]//para ekleme onaylama
         public IActionResult ApproveAddMoney(int addMoneyId)
         {
@@ -55,16 +43,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpGet("addproduct")]
-        public IActionResult AddProduct(AddProduct product)
-        {
-            var result = _addProductService.Add(product);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
+        
         [HttpPost("approveaddproduct")]//ürün ekleme
         public IActionResult ApproveAddProduct(int addproductId)
         {
@@ -79,6 +58,27 @@ namespace WebAPI.Controllers
         public IActionResult RefusalAddProduct(int addproductId)
         {
             var result = _addProductService.Refusal(addproductId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getapproveaddproduct")]
+        public IActionResult GetApproveAddProduct()
+        {
+            var result = _addProductService.ToBeApproved();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("getapproveaddmoney")]
+        public IActionResult GetApproveAddMoney()
+        {
+            var result = _addMoneyService.GetApproved();
             if (result.Success)
             {
                 return Ok(result);

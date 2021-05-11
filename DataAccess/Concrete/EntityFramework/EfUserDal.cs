@@ -10,6 +10,15 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfUserDal : EfEntityRepositoryBase<User, YazilimYapimiContext>, IUserDal
     {
+        public void AddUserOperationClaims(UserOperationClaim userOperationClaim)
+        {
+            using (var context = new YazilimYapimiContext())
+            {
+                context.UserOperationClaims.Add(userOperationClaim);
+                context.SaveChanges();
+            }
+        }
+
         public List<OperationClaim> GetClaims(User user)
         {
             using (var context = new YazilimYapimiContext())
