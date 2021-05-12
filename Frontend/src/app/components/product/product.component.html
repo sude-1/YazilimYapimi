@@ -7,7 +7,7 @@
     <input type="text" [(ngModel)]="filterText" class="form-control" 
     id="filterText" placeholder="arama ifadesi giriniz">
   </div>
-  <div *ngIf="filterText" class="alert alert-warning">
+  <div *ngIf="filterText.length>2" class="alert alert-success">
     {{filterText}} aradınız
   </div> 
 <table *ngIf="dataLoaded==true"  class="table">
@@ -25,7 +25,7 @@
             <td>{{product.productId}} </td>
             <td>{{product.productName}} </td>
             <td>{{product.categoryId}} </td>
-            <td>{{product.unitPrice |  currency}} </td>
+            <td>{{product.unitPrice |  currency:"₺"}} </td>
             <td>{{product.quantity}} </td>
         </tr>
     </tbody>

@@ -41,6 +41,4 @@ export class ProductComponent implements OnInit {
       this.dataLoaded=true;
     })
   }
-
-  
 }

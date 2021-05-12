@@ -4,4 +4,5 @@ export interface Product{
     productName:string;
     quantity:number;
     unitPrice:number;
+    supplierId:number;
 }
