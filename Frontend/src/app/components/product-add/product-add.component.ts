@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormBuilder,FormControl,Validators} from '@angular/forms'
 import { ProductService } from 'src/app/services/product.service';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-product-add',
@@ -11,7 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductAddComponent implements OnInit {
 
   productAddForm:FormGroup;
-  constructor(private formBuilder:FormBuilder, private productService:ProductService, private toastrService:ToastrService) { }
+  constructor(private formBuilder:FormBuilder, private productService:ProductService, private toastrService:ToastrService,
+    private userService:UserService) { }
 
   ngOnInit(): void {
  
@@ -24,7 +26,7 @@ export class ProductAddComponent implements OnInit {
       unitPrice:["",Validators.required],
       quantity:["",Validators.required],
       categoryId:["",Validators.required],
-      supplierId:["",Validators.required]
+      supplierId:this.userService.getUserId()
     })
   }
 

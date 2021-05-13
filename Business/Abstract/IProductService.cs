@@ -17,8 +17,6 @@ namespace Business.Abstract
         IDataResult<Product> IsThereAnyProduct(AddProduct addProduct);//ürün var mı 
         IResult Update(Product product);
         IResult Add(Product product);//sadece mesaj
-        //IResult AddTransactionalTest(Product product);
-
 
     }
 }
