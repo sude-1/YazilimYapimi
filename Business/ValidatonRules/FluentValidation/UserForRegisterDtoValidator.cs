@@ -17,7 +17,7 @@ namespace Business.ValidatonRules.FluentValidation
             RuleFor(u => u.LastName).NotEmpty();
             RuleFor(u => u.UserName).NotEmpty();
             RuleFor(u => u.Password).NotEmpty();
-            RuleFor(u => u.Password).NotEmpty().Length(11);
+            RuleFor(u => u.TcKimlik).NotEmpty().Length(11);
             RuleFor(u => u.Telefon).NotEmpty().Length(11);
         }
     }

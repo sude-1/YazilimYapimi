@@ -22,7 +22,6 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IUserService.Get")]
-        [SecuredOperation("user")]
         public IResult Add(User user)
         {
             _userDal.Add(user);

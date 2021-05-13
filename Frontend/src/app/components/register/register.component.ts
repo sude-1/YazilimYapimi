@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
       password:["",Validators.required],
       userName:["",Validators.required],
       address:["",Validators.required],
-      telefonNo:["",Validators.required],
+      telefon:["",Validators.required],
       tcKimlik:["",Validators.required]
     })
   }
@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
       console.log(this.registerForm.value);
       let loginModel= Object.assign({},this.registerForm.value)
 
-      this.authService.login(loginModel).subscribe(response=>{
+      this.authService.register(loginModel).subscribe(response=>{
         this.toastrService.info(response.message)
         localStorage.setItem("token",response.data.token)
         console.log(response.data.token)

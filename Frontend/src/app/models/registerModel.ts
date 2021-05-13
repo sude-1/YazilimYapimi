@@ -6,5 +6,5 @@ export interface RegisterModel{
     userName:string,
     address:string,
     tcKimlik:string,
-    telefonNo:string
+    telefon:string
 }

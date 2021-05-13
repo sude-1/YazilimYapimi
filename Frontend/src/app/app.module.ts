@@ -16,6 +16,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { RegisterComponent } from './components/register/register.component';
     FilterPipePipe,
     ProductAddComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

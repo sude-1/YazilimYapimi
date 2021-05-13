@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
 
@@ -9,11 +10,16 @@ import { CategoryService } from 'src/app/services/category.service';
 })
 export class CategoryComponent implements OnInit {
   categories : Category[]=[];
-  currentCategory : Category ;
+  currentCategory : Category={categoryId:-1,categoryName:""} ;
   
-  constructor(private categoryService:CategoryService) { }
+  constructor(private categoryService:CategoryService,private activatedRoute:ActivatedRoute) { }
   
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    this.activatedRoute.params.subscribe(params=>{
+    if(params["categoryId"]){
+      this.currentCategory.categoryId=params["categoryId"]
+    }
+  })
     this.getCategories();
   }
 
@@ -28,7 +34,7 @@ export class CategoryComponent implements OnInit {
   }
 
   getCurrentCategoryClass(category:Category){
-    if(category ==this.currentCategory){
+    if(category.categoryId ==this.currentCategory.categoryId){
       return "list-group-item active btn"
     }
     else
@@ -38,7 +44,7 @@ export class CategoryComponent implements OnInit {
   }
 
   getAllCategoryClass(){
-    if(!this.currentCategory){
+    if(this.currentCategory.categoryId==-1){
       return "list-group-item active btn"
     }
     else
@@ -48,7 +54,7 @@ export class CategoryComponent implements OnInit {
   }
   
    deleteCurrentCategory(){
-     this.currentCategory = null;
+     this.currentCategory.categoryId = -1;
    }
 
 }
