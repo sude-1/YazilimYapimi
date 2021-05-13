@@ -13,7 +13,9 @@ const routes: Routes = [
   {path:"products/category/:categoryId", component:HomePageComponent},
   {path:"products/add", component:HomePageComponent, canActivate:[LoginGuard]},
   {path:"login", component:LoginComponent},
-  {path:"register", component:RegisterComponent}
+  {path:"register", component:RegisterComponent},
+  {path:"money/add", component:HomePageComponent, canActivate:[LoginGuard]},
+  {path:"order/add", component:HomePageComponent, canActivate:[LoginGuard]}
 ];
 
 @NgModule({

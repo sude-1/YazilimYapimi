@@ -17,6 +17,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { OrderAddComponent } from './components/order-add/order-add.component';
+import { MoneyAddComponent } from './components/money-add/money-add.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +29,9 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     ProductAddComponent,
     LoginComponent,
     RegisterComponent,
-    HomePageComponent
+    HomePageComponent,
+    OrderAddComponent,
+    MoneyAddComponent
   ],
   imports: [
     BrowserModule,
