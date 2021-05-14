@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,6 +22,18 @@ namespace WebAPI.Controllers
             _orderDetailService = orderDetailService;
         }
 
-
+        [HttpPost("add")]
+        public IActionResult Add(Order order)
+        {
+            var result = _orderService.Add(order);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
     }
 }

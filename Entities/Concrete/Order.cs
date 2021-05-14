@@ -9,6 +9,7 @@ namespace Entities.Concrete
     {
         public int OrderId { get; set; }
         public int CategoryId { get; set; }
+        public string ProductName { get; set; }
         public int CustomerId { get; set; }
         public DateTime OrderDate { get; set; }
         public decimal Quantity { get; set; }

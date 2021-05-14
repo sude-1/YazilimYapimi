@@ -12,5 +12,6 @@ namespace Business.Abstract
         IResult CreateWallet(User user);
         IResult AddMoney(UserWallet userWallet);
         IDataResult<UserWallet> GetById(int userId);
+        IResult Update(UserWallet userWallet);
     }
 }

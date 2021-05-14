@@ -39,5 +39,11 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<UserWallet>(_userWalletDal.Get(u => u.UserId == userId));
         }
+
+        public IResult Update(UserWallet userWallet)
+        {
+            _userWalletDal.Update(userWallet);
+            return new SuccessResult();
+        }
     }
 }

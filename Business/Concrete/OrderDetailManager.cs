@@ -2,6 +2,7 @@
 using Business.BusinessAspects.Autofac;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,12 @@ namespace Business.Concrete
         public OrderDetailManager(IOrderDetailDal orderDetailDal)
         {
             _orderDetailDal = orderDetailDal;
+        }
+
+        public IResult Add(OrderDetail orderDetail)
+        {
+            _orderDetailDal.Add(orderDetail);
+            return new SuccessResult();
         }
 
         [SecuredOperation("admin")]
