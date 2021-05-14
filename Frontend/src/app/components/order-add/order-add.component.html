@@ -1,1 +1,58 @@
-<p>order-add works!</p>
+<div class="content ">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header"><h5 class="title"> Sipariş Ekleme</h5></div>
+            <div class="card-body">
+                <form [formGroup]="orderAddForm">
+                
+                     <div class="mb-3">
+                    <label for="categoryId">Kategori</label>
+                    <div class="form-group">
+                      <select
+                      [(ngModel)]="selectCategoryId"
+                      (ngModelChange)="onChangeofOptions()"
+                        class="form-select"
+                        formControlName="categoryId"
+                        aria-label="Default select example"
+                      >
+                        <option
+                          *ngFor="let category of categories"
+                          [value]= "category.categoryId"
+                        >
+                          {{ category.categoryName }}
+                        </option>
+                      </select>
+                    </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productName"> Ürünler</label>
+                      <div class="formGroup">
+                        <select
+                        class="form-select"
+                        formControlName="productName"
+                        aria-label="Default select example"
+                      >
+                        <option
+                          *ngFor="let product of products"
+                          [value]= "product.productName"
+                        >
+                          {{ product.productName }}
+                        </option>
+                      </select>
+                      </div>
+                    </div>     
+                    <div class="mb-3">
+                        <label for="quantity">Lütfen Almak İstediğiniz Ürünün Kilosunu Giriniz</label>
+                      <div class="formGroup">
+                        <input type="number" id="quantity" 
+                        formControlName="quantity" class="form-control" placeHolder=""/>
+                      </div>
+                    </div>                
+                </form>
+            </div>
+            <div class="card-footer">
+                <button class="btn byn-fill btn-primary" (click)="add()">Ekle</button>
+            </div>
+        </div>        
+    </div>
+</div>

@@ -22,6 +22,20 @@ namespace WebAPI.Controllers
             _orderDetailService = orderDetailService;
         }
 
+        [HttpGet("getorderdetails")]
+        public IActionResult GetOrderDetails()
+        {
+            var result = _orderDetailService.GetOrderDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
+
         [HttpPost("add")]
         public IActionResult Add(Order order)
         {

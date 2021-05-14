@@ -1,8 +1,9 @@
-export interface OrderDetailDto{
-    id:number;
-    productName:string
-    userName:string
-    orderDate:Date
-    quantity:number
-    total:number
+export interface Order{
+    orderId:number;
+    categoryId:number;
+    productName:string;
+    customerId:number;
+    orderDate:Date;
+    quantity:number;
+    
 }

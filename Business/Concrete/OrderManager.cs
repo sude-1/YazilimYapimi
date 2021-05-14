@@ -54,7 +54,7 @@ namespace Business.Concrete
                     _userWalletService.Update(customerWallet);
                     product.Quantity -= purchased;
                     _productService.Update(product);
-                    orderDetails.Add(new OrderDetail { ProductId=product.ProductId,Quantity=purchased});
+                    orderDetails.Add(new OrderDetail { ProductId=product.ProductId,Quantity=purchased,SupplierId=product.SupplierId});
                 }
                
 
