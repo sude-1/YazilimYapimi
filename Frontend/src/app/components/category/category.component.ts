@@ -15,12 +15,12 @@ export class CategoryComponent implements OnInit {
   constructor(private categoryService:CategoryService,private activatedRoute:ActivatedRoute) { }
   
   ngOnInit(): void { 
+    this.getCategories();
     this.activatedRoute.params.subscribe(params=>{
     if(params["categoryId"]){
       this.currentCategory.categoryId=params["categoryId"]
     }
   })
-    this.getCategories();
   }
 
   getCategories(){

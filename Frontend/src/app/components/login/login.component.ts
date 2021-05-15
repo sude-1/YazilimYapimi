@@ -12,7 +12,8 @@ import { Router } from '@angular/router'
 export class LoginComponent implements OnInit {
 
   loginForm:FormGroup;
-  constructor(private formBuilder:FormBuilder, private authService:AuthService, private toastrService:ToastrService,private router:Router) { }
+  constructor(private formBuilder:FormBuilder, private authService:AuthService, 
+    private toastrService:ToastrService,private router:Router) { }
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -40,5 +41,9 @@ export class LoginComponent implements OnInit {
         this.toastrService.error(responseError.error)
       })
     }
+  }
+
+  register(){
+    this.router.navigate(["register"]);//register a yönlendiriyor
   }
 }

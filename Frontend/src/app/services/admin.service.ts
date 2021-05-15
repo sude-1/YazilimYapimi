@@ -23,19 +23,19 @@ export class AdminService {
     return this.httpClient.get<ListResponseModel<Product>>(this.apiUrl+"/getapproveaddproduct")
   }
 
-  approveAddProduct(addProduct:Product):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"/approveaddproduct",addProduct)
+  approveAddProduct(product:Product):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"/approveaddproduct",product)
   }
 
-  refusalAddProduct(addProduct:Product):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"/refusaladdproduct",addProduct)
+  refusalAddProduct(product:Product):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"/refusaladdproduct",product)
   }
 
-  approveAddoney(addMoney:Wallet):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"/approveaddmoney",addMoney)
+  approveAddMoney(money:Wallet):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"/approveaddmoney",money)
   }
   
-  refusalAddoney(addMoney:Wallet):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"/refusaladdmoney",addMoney)
+  refusalAddMoney(money:Wallet):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"/refusaladdmoney",money)
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl,Validators,FormBuilder } from "@angular/forms";
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class RegisterComponent implements OnInit {
 
   registerForm:FormGroup;
-  constructor(private formBuilder:FormBuilder, private authService:AuthService, private toastrService:ToastrService) { }
+  constructor(private formBuilder:FormBuilder, private authService:AuthService, 
+    private toastrService:ToastrService, private router:Router) { }
 
   ngOnInit(): void {
     this.createRegisterForm();
@@ -44,5 +46,8 @@ export class RegisterComponent implements OnInit {
         this.toastrService.error(responseError.error)
       })
     }
+  }
+  login(){
+    this.router.navigate(["login"]);
   }
 }

@@ -1,5 +1,5 @@
 export interface Wallet{
-    id:Number;
-    userId:Number;
-    money:Number;
+    id:number;
+    userId:number;
+    money:number;
 }

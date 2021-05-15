@@ -8,7 +8,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
-
+declare var $:any;
 @Component({
   selector: 'app-order-add',
   templateUrl: './order-add.component.html',
@@ -16,6 +16,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class OrderAddComponent implements OnInit {
 
+  selectProductName:string
   orderAddForm:FormGroup;
   categories: Category[];
   products:Product[];
@@ -30,8 +31,6 @@ export class OrderAddComponent implements OnInit {
     this.categoryService.getCategories().subscribe(
       (response) => {
         this.categories = response.data;
-      
-        
       },
       (errorResponse) => {
         console.log(errorResponse);
@@ -41,17 +40,20 @@ export class OrderAddComponent implements OnInit {
 
   createAddOrderForm(){
     this.orderAddForm = this.formBuilder.group({
-      productName:["",Validators.required],
+      productName:this.selectProductName,
       customerId:this.userService.getUserId(),
       quantity:["",Validators.required],
       categoryId:["",Validators.required],
     })    
   }
   onChangeofOptions() {
+    
     this.productService.getProductsByCategory(this.selectCategoryId).subscribe(
       (response) => {
         console.log(response)
-        this.products = response.data;
+        this.products = response.data.filter((product, i, arr) => {
+          return arr.indexOf(arr.find(p => p.productName === product.productName)) === i;
+        });
       },
       (errorResponse) => {
         console.log(errorResponse);
@@ -63,7 +65,9 @@ export class OrderAddComponent implements OnInit {
     if(this.orderAddForm.valid){
       let orderModel:Order = Object.assign({},this.orderAddForm.value)//içi boş bir obje oluşturuyor moneyModel için virgülden sonraki alanları eklicek
       orderModel.categoryId=Number(this.selectCategoryId)
+      orderModel.productName=$("select[id='productNameasd'").find('option:selected').text()
       console.log(orderModel)
+     
       this.orderService.add(orderModel).subscribe(response=>{
         this.toastrService.success(response.message,"Başarılı")
       },responseError=>{

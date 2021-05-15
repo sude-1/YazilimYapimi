@@ -9,12 +9,12 @@ import { ResponseModel } from '../models/responseModel';
 })
 export class OrderService {
 
-  apiUrl = "https://localhost:44346/api/orders";  
+  apiUrl = "https://localhost:44346/api/";  
 
   constructor(private httpClient:HttpClient) { }
 
   add(order:Order):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"/add",order)
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"orders/add",order)
   }
 
 }

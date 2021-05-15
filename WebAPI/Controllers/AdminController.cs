@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,9 +24,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("approveaddmoney")]//para ekleme onaylama
-        public IActionResult ApproveAddMoney(int addMoneyId)
+        public IActionResult ApproveAddMoney(AddMoney addMoney)
         {
-            var result = _addMoneyService.Approve(addMoneyId);
+            var result = _addMoneyService.Approve(addMoney.Id);
             if (result.Success)
             {
                 return Ok(result);
@@ -34,9 +35,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("refusaladdmoney")] // para reddetme 
-        public IActionResult RefusalAddMoney(int addMoneyId)
+        public IActionResult RefusalAddMoney(AddMoney addMoney)
         {
-            var result = _addMoneyService.Refusal(addMoneyId);
+            var result = _addMoneyService.Refusal(addMoney.Id);
             if (result.Success)
             {
                 return Ok(result);
@@ -45,9 +46,9 @@ namespace WebAPI.Controllers
         }
         
         [HttpPost("approveaddproduct")]//ürün ekleme
-        public IActionResult ApproveAddProduct(int addproductId)
+        public IActionResult ApproveAddProduct(AddProductDetailDto addProduct)
         {
-            var result = _addProductService.Approve(addproductId);
+            var result = _addProductService.Approve(addProduct.AddProductId);
             if (result.Success)
             {
                 return Ok(result);
@@ -55,9 +56,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("refusaladdproduct")]//ürün reddetme
-        public IActionResult RefusalAddProduct(int addproductId)
+        public IActionResult RefusalAddProduct(AddProductDetailDto addProduct)
         {
-            var result = _addProductService.Refusal(addproductId);
+            var result = _addProductService.Refusal(addProduct.AddProductId);
             if (result.Success)
             {
                 return Ok(result);

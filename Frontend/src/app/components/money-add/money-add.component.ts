@@ -13,7 +13,8 @@ import { WalletService } from 'src/app/services/wallet.service';
 export class MoneyAddComponent implements OnInit {
 
   moneyAddForm : FormGroup;
-  constructor(private formBuilder:FormBuilder, private walletService:WalletService, private toastrService:ToastrService,private userService:UserService ) { }
+  constructor(private formBuilder:FormBuilder, private walletService:WalletService, 
+    private toastrService:ToastrService,private userService:UserService ) { }
 
   ngOnInit(): void {
     this.createMoneyAddForm();

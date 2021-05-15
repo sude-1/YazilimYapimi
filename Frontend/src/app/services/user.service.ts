@@ -7,27 +7,29 @@ import jwt_decode from 'jwt-decode';
 })
 export class UserService {
   constructor(private authService: AuthService) {}
-  isUserHaveClaims(necessaryClaims: string[]): boolean {
+  roleControl(necessaryClaims: string[]): boolean {
     //verilen role/rollere sahip mi
     if (necessaryClaims == undefined) return false;
     if (this.authService.isAuthenticated() == false) {
       return false;
     }
-    let isUserHaveClaim: boolean = false;
+    let roleControl: boolean = false;
 
     let claims: string = JSON.parse(
       JSON.stringify(jwt_decode(localStorage.getItem('token')))
     )['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']; //jwt üzerinden decode ile çekiyor
-    claims.split(',').forEach((ownedClaim) => {
+
+    claims.toString().split(',').forEach((ownedClaim) => {
       //string olarak gelen rolleri virgül ile ayırıp rol karşılaştırıyor
       necessaryClaims.forEach((necessaryClaim) => {
         if (ownedClaim === 'admin' || ownedClaim === necessaryClaim) {
-          isUserHaveClaim = true;
+          roleControl = true;
         }
       });
     });
-    return isUserHaveClaim;
+    return roleControl;
   }
+
   getUserId(): number {
     if (this.authService.isAuthenticated()) {
       return Number(

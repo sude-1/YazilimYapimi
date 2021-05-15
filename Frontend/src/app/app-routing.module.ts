@@ -13,11 +13,11 @@ const routes: Routes = [
   {path:"",pathMatch:"full", component:HomePageComponent},
   {path:"products", component:HomePageComponent},
   {path:"products/category/:categoryId", component:HomePageComponent},
-  {path:"products/add", component:HomePageComponent, canActivate:[LoginGuard]},
+  {path:"products/add", component:ProductAddComponent, canActivate:[LoginGuard]},
   {path:"login", component:LoginComponent},
   {path:"register", component:RegisterComponent},
-  {path:"money/add", component:MoneyAddComponent},
-  {path:"order/add", component:OrderAddComponent}
+  {path:"money/add", component:MoneyAddComponent,canActivate:[LoginGuard]},
+  {path:"order/add", component:OrderAddComponent,canActivate:[LoginGuard]}
 ];
 
 @NgModule({

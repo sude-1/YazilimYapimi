@@ -54,7 +54,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Product>> GetByName(string productName, int supplierId)
         {
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p=>p.ProductName.Contains(productName)&&p.SupplierId!=supplierId));
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p=>p.ProductName.Contains(productName.Trim())&&p.SupplierId!=supplierId));
         }
 
         public IDataResult<List<Product>> GetByUnitPrice(decimal min, decimal max)
