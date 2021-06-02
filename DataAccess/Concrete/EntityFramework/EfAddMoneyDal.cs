@@ -18,14 +18,15 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result =
                 from addmoney in filter == null ? context.AddMoney : context.AddMoney.Where(filter)
-                join u in context.Users
-                on addmoney.UserId equals u.Id
+                join u in context.Users on addmoney.UserId equals u.Id
+                join c in context.Currencies on addmoney.CurrencyId equals c.CurrencyId
                 select new AddMoneyDetailDto
                 {
                     Id = addmoney.Id,
                     Money = addmoney.Money,
                     Confirmation = addmoney.Confirmation,
-                    UserName = u.UserName
+                    UserName = u.UserName,
+                    CurrencyUnit = c.CurrencyUnit
                 };
                 return result.ToList();
             }

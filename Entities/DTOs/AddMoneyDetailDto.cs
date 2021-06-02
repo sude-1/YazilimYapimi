@@ -10,5 +10,6 @@ namespace Entities.DTOs
         public string UserName { get; set; }
         public decimal Money { get; set; }
         public bool Confirmation { get; set; }
+        public string CurrencyUnit { get; set; }
     }
 }

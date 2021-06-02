@@ -9,5 +9,7 @@ namespace Business.Abstract
     public interface IOrderService
     {
         IResult Add(Order order);
+        IDataResult<List<Order>> GetByProductNameOrderPending(Product productName);
+        IDataResult<List<Order>> GetByReport(ReportDetail reportDetail);
     }
 }

@@ -11,5 +11,6 @@ namespace Entities.Concrete
         public int UserId { get; set; }
         public decimal Money { get; set; }
         public bool Confirmation { get; set; }
+        public int CurrencyId{ get; set; }//para birimini alacağız
     }
 }

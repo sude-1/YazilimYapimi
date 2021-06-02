@@ -61,5 +61,18 @@ namespace Core.DataAccess.EntityFramework
                 context.SaveChanges(); //ve ekle
             }
         }
+
+        public void UpdateList(List<TEntity> entities)
+        {
+            using (TContext context = new TContext())
+            {
+                foreach (var entity in entities)
+                {
+                    var updatedEntity = context.Entry(entity); //referansı yakala
+                    updatedEntity.State = EntityState.Modified; // o eklenecek nesne
+                }
+                context.SaveChanges(); //ve ekle
+            }
+        }
     }
 }

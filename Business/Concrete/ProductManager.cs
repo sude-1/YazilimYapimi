@@ -82,5 +82,12 @@ namespace Business.Concrete
 
             return new SuccessResult(Messages.ProductUpdated);
         }
+
+        public IResult UpdateList(List<Product> products)
+        {
+            _productDal.UpdateList(products);
+
+            return new SuccessResult(Messages.ProductUpdated);
+        }
     }
 }

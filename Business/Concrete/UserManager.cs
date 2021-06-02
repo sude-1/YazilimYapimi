@@ -30,6 +30,11 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        public IDataResult<User> GetAccountant()
+        {
+            return new SuccessDataResult<User>(_userDal.GetAccountant());
+        }
+
         public IDataResult<User> GetByMail(string email)
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));

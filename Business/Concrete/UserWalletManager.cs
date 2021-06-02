@@ -45,5 +45,11 @@ namespace Business.Concrete
             _userWalletDal.Update(userWallet);
             return new SuccessResult();
         }
+
+        public IResult UpdateList(List<UserWallet> userWallets)
+        {
+            _userWalletDal.UpdateList(userWallets);
+            return new SuccessResult();
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace Business.Abstract
         IDataResult<Product> GetById(int productId);
         IDataResult<Product> IsThereAnyProduct(AddProduct addProduct);//ürün var mı 
         IResult Update(Product product);
+        IResult UpdateList(List<Product> products);
         IResult Add(Product product);//sadece mesaj
         IDataResult<List<Product>> GetByName(string productName, int supplierId); 
 

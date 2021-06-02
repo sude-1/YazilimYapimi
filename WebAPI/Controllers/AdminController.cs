@@ -55,6 +55,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
         [HttpPost("refusaladdproduct")]//ürün reddetme
         public IActionResult RefusalAddProduct(AddProductDetailDto addProduct)
         {

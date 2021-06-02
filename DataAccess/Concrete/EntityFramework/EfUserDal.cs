@@ -19,6 +19,18 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
+        public User GetAccountant()
+        {
+            using(var context = new YazilimYapimiContext())
+            {
+                var result = from accountant in context.UserOperationClaims //muhasebe değişkenim kullanıcının işlem talepleri tablosu ile bağlıyor 
+                             join user in context.Users on accountant.UserId equals user.Id // user tablosuna join atıyoruz ve muhasebecinin userıd'si ile user'ın ıd kısmını eşitliyoruz 
+                             where accountant.OperationClaimId == 1002 // muhasebecinin tealep işlemi 1002 ise onu seçiyoruz
+                             select user;
+                return result.FirstOrDefault(); // sorgudan bir tane veri döndürür
+            }
+        }
+
         public List<OperationClaim> GetClaims(User user)
         {
             using (var context = new YazilimYapimiContext())

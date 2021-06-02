@@ -10,5 +10,6 @@ namespace DataAccess.Abstract
     {
         List<OperationClaim> GetClaims(User user);
         void AddUserOperationClaims(UserOperationClaim userOperationClaim);
+        User GetAccountant();
     }
 }

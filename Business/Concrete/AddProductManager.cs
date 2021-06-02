@@ -17,11 +17,13 @@ namespace Business.Concrete
     {
         IAddProductDal _addProductDal;
         IProductService _productService;
+        IOrderService _orderService;
 
-        public AddProductManager(IAddProductDal addProductDal,IProductService productService)
+        public AddProductManager(IAddProductDal addProductDal,IProductService productService, IOrderService orderService)
         {
             _addProductDal = addProductDal;
-            _productService = productService; 
+            _productService = productService;
+            _orderService = orderService;
         }
 
         [ValidationAspect(typeof(AddProductValidator))]
@@ -51,14 +53,19 @@ namespace Business.Concrete
             }
             else
             {
-                _productService.Add(new Product
+                var p = new Product
                 {
                     Quantity = result.Quantity,
                     ProductName = result.ProductName,
                     UnitPrice = result.UnitPrice,
                     SupplierId = result.SupplierId,
                     CategoryId = result.CategoryId
-                });
+                };
+                _productService.Add(p);
+                foreach (var order in _orderService.GetByProductNameOrderPending(p).Data)
+                {
+                    _orderService.Add(order);
+                }
             }
             return new SuccessResult();
         }
