@@ -16,4 +16,7 @@ export class WalletService {
   add(wallet:Wallet):Observable<SingleResponseModel<Wallet>>{
     return this.httpClient.post<SingleResponseModel<Wallet>>(this.apiUrl+"/add",wallet)
   }
+  getByUserId(id:number):Observable<SingleResponseModel<Wallet>>{
+    return this.httpClient.get<SingleResponseModel<Wallet>>(this.apiUrl+"/getbyid?userId="+id)
+  }
 }

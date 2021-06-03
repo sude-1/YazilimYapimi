@@ -24,10 +24,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("approveaddmoney")]//para ekleme onaylama
-        public IActionResult ApproveAddMoney(AddMoney addMoney)
+        public IActionResult ApproveAddMoney(AddMoneyDetailDto addMoney)
         {
-            var result = _addMoneyService.Approve(addMoney.Id);
-            if (result.Success)
+            var result = _addMoneyService.Approve(addMoney);
+            if (result.Result.Success)
             {
                 return Ok(result);
             }

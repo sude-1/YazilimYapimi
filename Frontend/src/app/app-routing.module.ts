@@ -7,6 +7,7 @@ import { OrderAddComponent } from './components/order-add/order-add.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { ProductComponent } from './components/product/product.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ReportComponent } from './components/report/report.component';
 import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path:"login", component:LoginComponent},
   {path:"register", component:RegisterComponent},
   {path:"money/add", component:MoneyAddComponent,canActivate:[LoginGuard]},
-  {path:"order/add", component:OrderAddComponent,canActivate:[LoginGuard]}
+  {path:"order/add", component:OrderAddComponent,canActivate:[LoginGuard]},
+  {path:"report/create", component:ReportComponent}
 ];
 
 @NgModule({

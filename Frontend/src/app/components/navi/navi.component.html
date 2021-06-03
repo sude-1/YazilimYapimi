@@ -25,6 +25,12 @@
         <li class="nav-item">
           <a class="nav-link btn" routerLink="/order/add">Sipariş Ver</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link btn" routerLink="/report/create">Rapor Oluştur</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link ">para:{{wallet}}</a>
+        </li>
         <li class="nav-item" *ngIf="admin" class="dropdown">
           <button
           *ngIf="toBeApprove"

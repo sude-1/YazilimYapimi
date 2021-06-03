@@ -19,6 +19,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { OrderAddComponent } from './components/order-add/order-add.component';
 import { MoneyAddComponent } from './components/money-add/money-add.component';
+import { ReportComponent } from './components/report/report.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { MoneyAddComponent } from './components/money-add/money-add.component';
     RegisterComponent,
     HomePageComponent,
     OrderAddComponent,
-    MoneyAddComponent
+    MoneyAddComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,

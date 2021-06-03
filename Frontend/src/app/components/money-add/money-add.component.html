@@ -10,7 +10,14 @@
                         <input type="number" id="money" 
                         formControlName="money" class="form-control" placeHolder="₺50"/>
                       </div>
-                    </div>                   
+                    </div>    
+                    <div class="mb-3"></div>    
+                    <label>Para Birimi</label>
+                      <div class="formGroup">
+                        <select class="form-select"
+                        formControlName="currencyId"
+                        aria-label="Default select example"><option *ngFor="let currency of currencies" [value]="currency.currencyId">{{currency.currencyUnit}}</option></select>
+                      </div>                      
                 </form>
             </div>
             <div class="card-footer">

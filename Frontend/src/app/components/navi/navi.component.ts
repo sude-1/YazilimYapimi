@@ -29,6 +29,10 @@ export class NaviComponent implements OnInit {
     if(this.loginsuccesful){
       this.admin = this.userService.roleControl(['admin'])//giriş yapıldıysa admin mi
       this.user = this.userService.getUserId();
+      this.walletService.getByUserId(this.user).subscribe(response=>{
+        this.wallet=response.data.money
+        console.log(this.wallet)
+      })
       if(this.admin){
         this.adminService.getAddMoney().subscribe(response=>{
           this.moneyToBeApprove = response.data;

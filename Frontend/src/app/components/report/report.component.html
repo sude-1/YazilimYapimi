@@ -1,0 +1,33 @@
+<div class="content ">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header"><h5 class="title"> Rapor Oluştur</h5></div>
+            <div class="card-body">
+                <form [formGroup]="reportForm">
+                    <div class="mb-3">
+                        <label for="productName">Başlangıç Tarihi</label>
+                      <div class="formGroup">
+                        <input type="datetime" class="form-control" id="Date" 
+                        formControlName="startDate" placeHolder=""  [(ngModel)]="startDate"/>
+                      </div>
+                    </div>     
+                    <div class="mb-3">
+                        <label for="unitPrice">Bitiş tarihi</label>
+                        <div class="form-group">
+                          <input
+                            type="datetime"
+                            id="date"
+                            formControlName="endDate"
+                            class="form-control"
+                            [min]="startDate"                    
+                          />
+                        </div>
+                      </div>              
+                </form>
+            </div>
+            <div class="card-footer">
+                <button class="btn byn-fill btn-primary" (click)="create()">Oluştur</button>
+            </div>
+        </div>        
+    </div>
+</div>

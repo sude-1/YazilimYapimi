@@ -4,6 +4,7 @@ using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
@@ -11,7 +12,7 @@ namespace Business.Abstract
     {
         IResult Add(AddMoney money);
         IDataResult<List<AddMoneyDetailDto>> GetApproved();
-        IResult Approve(int addMoneyId);
+        Task<IResult> Approve(AddMoneyDetailDto addMoney);
         IResult Refusal(int addMoneyId);
     }
 }
