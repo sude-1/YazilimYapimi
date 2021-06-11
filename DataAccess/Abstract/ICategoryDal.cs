@@ -8,5 +8,6 @@ namespace DataAccess.Abstract
 {
     public interface ICategoryDal : IEntityRepository<Category>
     {      
+        // dto olmadığı için bir şey yazmıyorum belki ilerleyen zamanlarda olur diye oluşturmam gerekli 
     }
 }

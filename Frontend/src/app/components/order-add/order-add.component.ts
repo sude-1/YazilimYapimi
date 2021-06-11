@@ -44,6 +44,7 @@ export class OrderAddComponent implements OnInit {
       customerId:this.userService.getUserId(),
       quantity:["",Validators.required],
       categoryId:["",Validators.required],
+      unitPrice:["",Validators.required],
     })    
   }
   onChangeofOptions() {
@@ -65,7 +66,7 @@ export class OrderAddComponent implements OnInit {
     if(this.orderAddForm.valid){
       let orderModel:Order = Object.assign({},this.orderAddForm.value)//içi boş bir obje oluşturuyor moneyModel için virgülden sonraki alanları eklicek
       orderModel.categoryId=Number(this.selectCategoryId)
-      orderModel.productName=$("select[id='productNameasd'").find('option:selected').text()
+      orderModel.productName=$("select[id='productName'").find('option:selected').text()
       console.log(orderModel)
      
       this.orderService.add(orderModel).subscribe(response=>{

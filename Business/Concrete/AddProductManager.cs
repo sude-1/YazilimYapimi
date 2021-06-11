@@ -19,6 +19,7 @@ namespace Business.Concrete
         IProductService _productService;
         IOrderService _orderService;
 
+        //constructor oluşturuyoruz hep new yapmamak için ilk önce bu kısım çalışır
         public AddProductManager(IAddProductDal addProductDal,IProductService productService, IOrderService orderService)
         {
             _addProductDal = addProductDal;
@@ -39,20 +40,21 @@ namespace Business.Concrete
         [CacheRemoveAspect("IAddProduct.Get")]
         public IResult Approve(int addproductId)
         {
+            //onaylancakları id ye göre geteiriyoruz
             var result = _addProductDal.Get(addp => addp.Id == addproductId);
             if (result.Confirmation)
             {
-                return new ErrorResult();
+                return new ErrorResult(); //onaylanmışşsa tekrar onaylanmasın
             }
-            result.Confirmation = true;
-            var product = _productService.IsThereAnyProduct(result).Data;
-            if (product!=null)
+            result.Confirmation = true; //onaylanmamışsa true yap onayı 
+            var product = _productService.IsThereAnyProduct(result).Data; // hiç ürün var mı fonksiyonundaki data yı getiriyorouz
+            if (product!=null) //ürün var ise
             {
-                product.Quantity += result.Quantity;
-                _productService.Update(product);
+                product.Quantity += result.Quantity; //o ürünün kilosounu artıyorum
+                _productService.Update(product); // güncelleme yapıyorum
             }
             else
-            {
+            { // yok ise yeni bir ürün oluşturuyorum 
                 var p = new Product
                 {
                     Quantity = result.Quantity,
@@ -61,10 +63,10 @@ namespace Business.Concrete
                     SupplierId = result.SupplierId,
                     CategoryId = result.CategoryId
                 };
-                _productService.Add(p);
-                foreach (var order in _orderService.GetByProductNameOrderPending(p).Data)
+                _productService.Add(p); //yeni ürünü ekliyorum
+                foreach (var order in _orderService.GetByProductNameOrderPending(p).Data) //bekleyen ürün var mı
                 {
-                    _orderService.Add(order);
+                    _orderService.Add(order); 
                 }
             }
             return new SuccessResult();
@@ -74,6 +76,7 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<AddProductDetailDto>> ToBeApproved()//onaylancaklar
         {
+            //onaylanacak ürünleri listeleme
             return new SuccessDataResult<List<AddProductDetailDto>>
                 (_addProductDal.GetAddProductDetails(addp => addp.Confirmation == false));
         }
@@ -82,6 +85,7 @@ namespace Business.Concrete
         [CacheRemoveAspect("IAddProduct.Get")]
         public IResult Refusal(int addproductId)
         {
+            //reddetme işlemi
             _addProductDal.Delete(new AddProduct { Id = addproductId });
             return new SuccessResult("ürün ekleme reddedildi");
         }

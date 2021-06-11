@@ -10,6 +10,7 @@ namespace DataAccess.Abstract
 {
     public interface IAddProductDal : IEntityRepository<AddProduct>
     {
+        //AddProductDetailDto yu listeliyoruz ve bunu filtre verebiliriz diyoruz
         List<AddProductDetailDto> GetAddProductDetails(Expression<Func<AddProduct, bool>> filter = null);
     }
 }

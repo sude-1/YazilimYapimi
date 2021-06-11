@@ -5,6 +5,8 @@ using System.Text;
 
 namespace Entities.Concrete
 {
+
+    //burada döviz sistemi apimizi json formatında çalıştırtım ve gerekli özellikleri yazdım
     public class MoneyValues
     {
         public Rates Rates { get; set; }

@@ -10,6 +10,7 @@ namespace DataAccess.Concrete.EntityFramework
     //Context veri tabanı tabloları ile proje classlarını bağlamak
     public class YazilimYapimiContext : DbContext
     {
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=yazilimyapimi;Trusted_Connection=true");

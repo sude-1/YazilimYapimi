@@ -18,6 +18,7 @@ namespace Business.Concrete
         }
         public IDataResult<List<Currency>> GetAllCurrency()
         {
+            //bütün hepsini getiriyor
             return new SuccessDataResult<List<Currency>>(_currencyDal.GetAll());
         }
     }

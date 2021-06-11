@@ -43,6 +43,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Product>> GetAllByCategory(int id)
         {
+            //girilen ürünün kategori id si ile diğer ürünün kategori id si aynı mı aynıysa getir
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id));
         }
 
@@ -59,6 +60,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Product>> GetByUnitPrice(decimal min, decimal max)
         {
+            //ürününün fiyatı girilen min değerinden büyük mü ve max değerinden kücük mü uygun olanaları listele 
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max));
         }
 
@@ -69,6 +71,7 @@ namespace Business.Concrete
 
         public IDataResult<Product> IsThereAnyProduct(AddProduct addProduct)
         {
+            //daha önce veri tabanımızda aynı ürün var mı kontrolü yapıyorum eklenenen ürünün kateori id sine satıcısına fiyat ve ismine bakıyoruz 
             return new SuccessDataResult<Product>(_productDal.Get(p => p.CategoryId == addProduct.CategoryId &&
              p.SupplierId==addProduct.SupplierId 
             && p.Quantity==addProduct.Quantity && p.ProductName==addProduct.ProductName ));
@@ -78,6 +81,7 @@ namespace Business.Concrete
         [SecuredOperation("user")]
         public IResult Update(Product product)
         {
+            //güncelleme 
             _productDal.Update(product);
 
             return new SuccessResult(Messages.ProductUpdated);

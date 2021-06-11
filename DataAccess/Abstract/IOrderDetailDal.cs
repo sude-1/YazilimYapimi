@@ -10,6 +10,7 @@ namespace DataAccess.Abstract
 {
     public interface IOrderDetailDal : IEntityRepository<OrderDetail>
     {
+        //GetOrderDetails fonksiyonunu kullanarak OrderDetailDto yu listeleme yapıyorum
         List<OrderDetailDto> GetOrderDetails();
     }
 }

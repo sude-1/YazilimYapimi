@@ -27,6 +27,7 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<Category> GetById(int categoryId)
         {
+            //uyuşan id leri getir
             return new SuccessDataResult<Category>(_categoryDal.Get(c => c.CategoryId == categoryId));
         }
     }

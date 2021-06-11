@@ -8,5 +8,6 @@ namespace DataAccess.Abstract
 {
     public interface IUserWalletDal : IEntityRepository<UserWallet>
     {
+        // dto olmadığı için bir şey yazmıyorum belki ilerleyen zamanlarda olur diye oluşturmam gerekli 
     }
 }

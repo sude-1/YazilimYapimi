@@ -8,8 +8,8 @@ namespace Business.Abstract
 {
     public interface IOrderService
     {
-        IResult Add(Order order);
-        IDataResult<List<Order>> GetByProductNameOrderPending(Product productName);
-        IDataResult<List<Order>> GetByReport(ReportDetail reportDetail);
+        IResult Add(Order order); //sipariş ekleme
+        IDataResult<List<Order>> GetByProductNameOrderPending(Product productName); //ürün fiyatı uymamışsa bekleyen sipariş yapıyor
+        IDataResult<List<Order>> GetByReport(ReportDetail reportDetail); //rapor
     }
 }

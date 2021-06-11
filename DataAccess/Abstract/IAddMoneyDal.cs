@@ -10,6 +10,7 @@ namespace DataAccess.Abstract
 {
     public interface IAddMoneyDal : IEntityRepository<AddMoney>
     {
+        //AddMoneyDetailDto yu listeliyoruz ve bunu filtre verebiliriz diyoruz
         List<AddMoneyDetailDto> GetAddMoneyDetails(Expression<Func<AddMoney, bool>> filter = null);
     }
 }

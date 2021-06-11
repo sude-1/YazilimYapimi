@@ -9,7 +9,7 @@ namespace Business.Abstract
 {
     public interface IOrderDetailService
     {
-        IDataResult<List<OrderDetailDto>> GetOrderDetails();
-        IResult Add(OrderDetail orderDetail);
+        IDataResult<List<OrderDetailDto>> GetOrderDetails(); //sipariş detayı
+        IResult Add(OrderDetail orderDetail); 
     }
 }

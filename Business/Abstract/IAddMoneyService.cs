@@ -10,10 +10,10 @@ namespace Business.Abstract
 {
     public interface IAddMoneyService 
     {
-        IResult Add(AddMoney money);
-        IDataResult<List<AddMoneyDetailDto>> GetApproved();
-        Task<IResult> Approve(AddMoneyDetailDto addMoney);
-        IResult Refusal(int addMoneyId);
+        IResult Add(AddMoney money); // para ekleme
+        IDataResult<List<AddMoneyDetailDto>> GetApproved(); //onaylancak paraların listesini getirme 
+        Task<IResult> Approve(AddMoneyDetailDto addMoney);//onay işlemi yapılıyor
+        IResult Refusal(int addMoneyId); //reddetme işlemi
     }
 }
 

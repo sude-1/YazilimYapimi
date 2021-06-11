@@ -40,31 +40,31 @@ namespace Business.Concrete
         [CacheRemoveAspect("IAddMoneyService.Get")]
         public async Task<IResult> Approve(AddMoneyDetailDto addMoney)
         {
-            //ürün onaylama
+            // onaylama
+            //döviz apim
             string adres = $"https://api.exchangerate.host/latest?base={addMoney.CurrencyUnit}&symbols=TRY&amount={addMoney.Money}";
-            //var myType = MyTypeBuilder.CompileResultType(new List<Field>() { new Field { FieldName = addMoney.CurrencyUnit, FieldType = typeof(MoneyValues) } });
             var data = await WebApiHelper.GetMethod<MoneyValues>(adres);
 
-           // MoneyValues money = data.GetType().GetProperty(addMoney.CurrencyUnit).GetValue(data) as MoneyValues;
-            var result = _addMoneyDal.Get(a => a.Id == addMoney.Id);
+            var result = _addMoneyDal.Get(a => a.Id == addMoney.Id); 
             if (result.Confirmation)
             {
                 return new ErrorResult();
             }
-            result.Confirmation = true;
-            _addMoneyDal.Update(result);
+            result.Confirmation = true; //para onayı true 
+            _addMoneyDal.Update(result);//güncelleme yapılıyor
             
+            //kullanıcının cüzdanın para ekleme yapılacak kullanıcı id ve paarayı türk lirasına çevirip ekleme yapılıyor
             _userWalletService.AddMoney(new UserWallet { UserId = result.UserId, Money = data.Rates.TRY });
             return new SuccessResult();
         }
 
-        [SecuredOperation("admin")]
+        [SecuredOperation("admin")] //yetkisi admin ise
         [CacheAspect]
         public IDataResult<List<AddMoneyDetailDto>> GetApproved()
         {
+            //burada onaylanacak paraların listesini getiriyor
             return new SuccessDataResult<List<AddMoneyDetailDto>>
                 (_addMoneyDal.GetAddMoneyDetails(addmoney => addmoney.Confirmation == false));
-            //onaylancakları getiriyor
         }
 
         [SecuredOperation("admin")]

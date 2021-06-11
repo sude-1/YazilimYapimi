@@ -8,6 +8,6 @@ namespace Business.Abstract
 {
     public interface ICurrencyService
     {
-        IDataResult<List<Currency>> GetAllCurrency();
+        IDataResult<List<Currency>> GetAllCurrency(); //bütün para birimlerini getir
     }
 }

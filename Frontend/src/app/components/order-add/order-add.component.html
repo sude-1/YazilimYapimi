@@ -28,7 +28,7 @@
                         <label for="productName"> Ürünler</label>
                       <div class="formGroup">
                         <select
-                        id="productNameasd"
+                        id="productName"
                         [(ngModel)]="selectProductName"
                         class="form-select"
                         formControlName="productName"
@@ -47,9 +47,16 @@
                         <label for="quantity">Lütfen Almak İstediğiniz Ürünün Kilosunu Giriniz</label>
                       <div class="formGroup">
                         <input type="number" id="quantity" 
-                        formControlName="quantity" class="form-control" placeHolder=""/>
+                        formControlName="quantity" class="form-control" placeHolder="10kg"/>
                       </div>
-                    </div>                
+                    </div>           
+                    <div class="mb-3">
+                      <label>Lütfen Almak İstediğiniz Ürünün Fiyatını Giriniz</label>
+                    <div class="formGroup">
+                      <input type="number" id="unitPrice" 
+                      formControlName="unitPrice" class="form-control" placeHolder="10₺"/>
+                    </div>
+                  </div>                
                 </form>
             </div>
             <div class="card-footer">

@@ -5,8 +5,10 @@ using System.Text;
 
 namespace Entities.DTOs
 {
+
+    //kullanıcının kayıt olması için gerekli özellikler
     public class UserForRegisterDto : IDto
-    { //kullanıcı adı ekleme
+    { 
         public string Email { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }

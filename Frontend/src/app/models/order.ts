@@ -5,5 +5,4 @@ export interface Order{
     customerId:number;
     orderDate:Date;
     quantity:number;
-    
 }
